@@ -1,7 +1,6 @@
 package com.dheeraj.hotelbookingapp.models;
 
 import com.dheeraj.hotelbookingapp.enums.Gender;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -1,6 +1,6 @@
 package com.dheeraj.hotelbookingapp.models;
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,7 +25,7 @@ public class Hotel {
     private Boolean hasWifi;
     private Boolean hasAC;
     private Boolean provideMeals;
-    private Integer overallRating;
+    private Double overallRating;
     private Integer minCostPerNight;
     private Integer maxCostPerNight;
 }
