@@ -21,9 +21,11 @@ public class UserService {
         user.setGender(userDto.getGender());
         return userRepository.save(user);
     }
-    public List<User> getAllUsers(){
+
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
+
     public String deleteUser(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
         if (optionalUser.isEmpty()) {

@@ -8,6 +8,7 @@ import java.util.List;
 public interface HotelRepository extends JpaRepository<Hotel, Long> {
 
     List<Hotel> findAllByCity(String city);
+
     List<Hotel> findAllByCityAndNoOfVacantRoomsGreaterThanEqual(String city, Integer noOfVacantRooms);
 
 }

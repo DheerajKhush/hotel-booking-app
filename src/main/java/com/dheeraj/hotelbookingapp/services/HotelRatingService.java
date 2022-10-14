@@ -28,15 +28,15 @@ public class HotelRatingService {
     @Autowired
     private UserRepository userRepository;
 
-    public RatingReview addRating(RatingReviewDto ratingReviewDto){
+    public RatingReview addRating(RatingReviewDto ratingReviewDto) {
         RatingReview ratingReview = new RatingReview();
         Optional<User> userOptional = userRepository.findById(ratingReviewDto.getUser_id());
-        if(userOptional.isEmpty())
+        if (userOptional.isEmpty())
             throw new UserNotFoundException("User not found, please check provided userId");
-        else{
+        else {
             ratingReview.setUser(userOptional.get());
             Optional<Hotel> hotelOptional = hotelRepository.findById(ratingReviewDto.getHotel_id());
-            if(hotelOptional.isEmpty())
+            if (hotelOptional.isEmpty())
                 throw new HotelNotFoundException("Hotel not found, please check provided hotelId");
             ratingReview.setHotel(hotelOptional.get());
             ratingReview.setRating(ratingReviewDto.getRating());
@@ -48,7 +48,7 @@ public class HotelRatingService {
     }
 
     private void updateHotelOverallRating(Hotel hotel) {
-        List<RatingReview> ratingReviewList= ratingReviewRepository.findAllByHotel(hotel);
+        List<RatingReview> ratingReviewList = ratingReviewRepository.findAllByHotel(hotel);
         Double averageRating = ratingReviewList.stream().collect(Collectors.averagingDouble(RatingReview::getRating));
         hotel.setOverallRating(averageRating);
         hotelRepository.save(hotel);

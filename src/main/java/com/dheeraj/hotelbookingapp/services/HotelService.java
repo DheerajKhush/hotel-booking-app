@@ -5,7 +5,6 @@ import com.dheeraj.hotelbookingapp.dtos.HotelFeaturesDto;
 import com.dheeraj.hotelbookingapp.exceptions.HotelNotFoundException;
 import com.dheeraj.hotelbookingapp.models.Hotel;
 import com.dheeraj.hotelbookingapp.repositories.HotelRepository;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,22 +63,22 @@ public class HotelService {
 //        if(hotelFeaturesDto.getHasAC() && hotelFeaturesDto.getHasWifi() && hotelFeaturesDto.getProvideMeals())
 //        return hotelRepository.findAllByCityAndNoOfVacantRoomsGreaterThanEqualAndHasWifiAndHasACAndProvideMeals(hotelFeaturesDto.getCity(), hotelFeaturesDto.getNoOfVacantRooms(), hotelFeaturesDto.getHasWifi(),hotelFeaturesDto.getHasAC(),hotelFeaturesDto.getProvideMeals());
 //        else {
-            List<Hotel> hotelList = hotelRepository.findAllByCityAndNoOfVacantRoomsGreaterThanEqual(hotelFeaturesDto.getCity(), hotelFeaturesDto.getNoOfVacantRooms());
-            if(!hotelList.isEmpty()) {
-                if (hotelFeaturesDto.getHasWifi())
-                    hotelList = hotelList.stream().filter(Hotel::getHasWifi).collect(Collectors.toList());
-                if (hotelFeaturesDto.getHasAC())
-                    hotelList = hotelList.stream().filter(Hotel::getHasAC).collect(Collectors.toList());
-                if (hotelFeaturesDto.getProvideMeals())
-                    hotelList = hotelList.stream().filter(Hotel::getProvideMeals).collect(Collectors.toList());
-                if(hotelFeaturesDto.getOverallRating()>0)
-                    hotelList = hotelList.stream().filter(hotel -> hotel.getOverallRating()!= null
-                            && hotel.getOverallRating() >= hotelFeaturesDto.getOverallRating()).collect(Collectors.toList());
-                if(hotelFeaturesDto.getMinCostPerNight()>0)
-                    hotelList = hotelList.stream().filter(hotel -> hotel.getMinCostPerNight() >= hotelFeaturesDto.getMinCostPerNight()).collect(Collectors.toList());
-                if(hotelFeaturesDto.getMaxCostPerNight()>0)
-                    hotelList = hotelList.stream().filter(hotel -> hotel.getMaxCostPerNight() <= hotelFeaturesDto.getMaxCostPerNight()).collect(Collectors.toList());
-            }
-            return hotelList;
+        List<Hotel> hotelList = hotelRepository.findAllByCityAndNoOfVacantRoomsGreaterThanEqual(hotelFeaturesDto.getCity(), hotelFeaturesDto.getNoOfVacantRooms());
+        if (!hotelList.isEmpty()) {
+            if (hotelFeaturesDto.getHasWifi())
+                hotelList = hotelList.stream().filter(Hotel::getHasWifi).collect(Collectors.toList());
+            if (hotelFeaturesDto.getHasAC())
+                hotelList = hotelList.stream().filter(Hotel::getHasAC).collect(Collectors.toList());
+            if (hotelFeaturesDto.getProvideMeals())
+                hotelList = hotelList.stream().filter(Hotel::getProvideMeals).collect(Collectors.toList());
+            if (hotelFeaturesDto.getOverallRating() > 0)
+                hotelList = hotelList.stream().filter(hotel -> hotel.getOverallRating() != null
+                        && hotel.getOverallRating() >= hotelFeaturesDto.getOverallRating()).collect(Collectors.toList());
+            if (hotelFeaturesDto.getMinCostPerNight() > 0)
+                hotelList = hotelList.stream().filter(hotel -> hotel.getMinCostPerNight() >= hotelFeaturesDto.getMinCostPerNight()).collect(Collectors.toList());
+            if (hotelFeaturesDto.getMaxCostPerNight() > 0)
+                hotelList = hotelList.stream().filter(hotel -> hotel.getMaxCostPerNight() <= hotelFeaturesDto.getMaxCostPerNight()).collect(Collectors.toList());
+        }
+        return hotelList;
     }
 }

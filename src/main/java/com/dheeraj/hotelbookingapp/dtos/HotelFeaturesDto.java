@@ -15,6 +15,6 @@ public class HotelFeaturesDto {
     private Boolean hasAC = false;
     private Boolean provideMeals = false;
     private Double overallRating = 0.0;
-    private Integer minCostPerNight = 0 ;
+    private Integer minCostPerNight = 0;
     private Integer maxCostPerNight = 0;
 }
