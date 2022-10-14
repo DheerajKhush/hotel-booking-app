@@ -20,7 +20,9 @@ public class Hotel {
     private String name;
     @Column(nullable = false)
     private String city;
+    @Column(nullable = false)
     private Integer totalNoOfRooms;
+    @Column(nullable = false)
     private Integer noOfVacantRooms;
     private Boolean hasWifi;
     private Boolean hasAC;

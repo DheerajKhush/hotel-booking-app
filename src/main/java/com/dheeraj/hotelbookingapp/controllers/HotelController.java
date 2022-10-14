@@ -2,21 +2,26 @@ package com.dheeraj.hotelbookingapp.controllers;
 
 import com.dheeraj.hotelbookingapp.dtos.HotelDto;
 import com.dheeraj.hotelbookingapp.dtos.HotelFeaturesDto;
+import com.dheeraj.hotelbookingapp.dtos.RatingReviewDto;
 import com.dheeraj.hotelbookingapp.models.Hotel;
+import com.dheeraj.hotelbookingapp.models.RatingReview;
+import com.dheeraj.hotelbookingapp.services.HotelRatingService;
 import com.dheeraj.hotelbookingapp.services.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/hotel")
 public class HotelController {
     @Autowired
     private HotelService hotelService;
+
+    @Autowired
+    private HotelRatingService hotelRatingService;
 
     //add new hotel
     @PostMapping
@@ -33,8 +38,8 @@ public class HotelController {
     }
 
     //Get list of hotels based on city
-    @GetMapping("/{city}")
-    public ResponseEntity<List<Hotel>> getHotelListByCity(@PathVariable String city) {
+    @GetMapping
+    public ResponseEntity<List<Hotel>> getHotelListByCity(@RequestParam(name = "city") String city) {
         return new ResponseEntity<>(hotelService.getHotelListByCity(city), HttpStatus.OK);
     }
 
@@ -44,6 +49,9 @@ public class HotelController {
         return new ResponseEntity<>(hotelService.getHotelByFeatures(hotelFeaturesDto),HttpStatus.OK);
     }
 
-
+    @PostMapping("/review")
+    public ResponseEntity<RatingReview> addRatingReview(@RequestBody RatingReviewDto ratingReviewDto){
+        return new ResponseEntity<>(hotelRatingService.addRating(ratingReviewDto),HttpStatus.OK);
+    }
 
 }
